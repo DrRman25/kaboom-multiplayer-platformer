@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Kaboom Multiplayer Platformer</title>
+        <style>
+            body {
+                background-color: black;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            #name {
+                font: inherit;
+                padding: 0.375rem 0.5rem;
+                border-radius: 0.5rem;
+                border: 0.125rem solid #808080;
+            }
+
+            #play {
+                font: inherit;
+                padding: 0.375rem 0.5rem;
+                border-radius: 0.5rem;
+                border: 0.125rem solid #404040;
+            }
+
+            #test {
+                font: inherit;
+                padding: 0.375rem 0.5rem;
+                border-radius: 0.5rem;
+                border: 0.125rem solid #0af;
+                background-color: #0af;
+                color: white;
+            }
+
+            #login {
+                width: 31rem;
+                margin: calc(50vh - 5rem) auto;
+                background-color: white;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            h1 {
+                margin-top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="login">
+            <h1>Kaboom Multiplayer Platformer</h1>
+            <input type="text" placeholder="AnEpicPlayer" id="name" />
+            <button id="play">Play</button>
+            <button id="test">Test</button>
+        </div>
+        <script src="socket.io/socket.io.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            document.getElementById("play").addEventListener("click", () => {
+                if (document.getElementById("name").value.trim() === "") {
+                    alert("Please enter a username.");
+                    return;
+                }
+                document.getElementById("login").style.display = "none";
+                const script = document.createElement("script");
+                script.type = "module";
+                script.src = "script.js";
+                document.body.appendChild(script);
+            });
+
+            document.getElementById("test").addEventListener("click", () => {
+                document.getElementById("name").value = `Player${Math.floor(Math.random() * 900) + 100}`;
+                document.getElementById("login").style.display = "none";
+                const script = document.createElement("script");
+                script.type = "module";
+                script.src = "script.js";
+                document.body.appendChild(script);
+            });
+        </script>
+    </body>
+</html>
